@@ -8,7 +8,7 @@ def send_email():
     mail_port = os.getenv('MAIL_PORT')
     mail_username = os.getenv('MAIL_USERNAME')
     mail_password = os.getenv('MAIL_PASSWORD')
-    to_email = "akramewu@gmail.com"
+    to_email = "theexploristofficial@gmail.com"
 
     msg = MIMEMultipart()
     msg['From'] = mail_username
