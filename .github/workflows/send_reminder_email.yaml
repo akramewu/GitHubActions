@@ -28,4 +28,4 @@ jobs:
         SENDER_EMAIL: ${{ secrets.SENDER_EMAIL }}
         EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
       run: |
-        python send_emails.py
+       python GitHubActions/send_email.py
