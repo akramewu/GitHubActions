@@ -24,14 +24,14 @@ message = """\
 Help me Ya Rabb, :'( Help my brothers and sisters. Don't give up hope.
 """
 
-# List of recipient emails
-recipient_emails = ["akramewu@gmail.com", "anotheremail@example.com", "yetanotheremail@example.com"]
+# Get recipient emails from environment variable and split into a list
+recipient_emails = os.getenv('RECIPIENT_EMAILS').split(',')
 
 # Connect to Gmail's SMTP server
 try:
     server = smtplib.SMTP('smtp.gmail.com', 587)
     server.starttls()
-    server.login(sender_email, password)  # Replace with your actual password
+    server.login(sender_email, password)
 
     for receiver_email in recipient_emails:
         # Prepare actual message for each recipient
