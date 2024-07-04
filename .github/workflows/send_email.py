@@ -24,8 +24,9 @@ message = """\
 Help me Ya Rabb, :'( Help my brothers and sisters. Don't give up hope.
 """
 
-# Get recipient emails from environment variable and split into a list
-recipient_emails = os.getenv('RECIPIENT_EMAILS').split(',')
+# Read recipient emails from the file
+with open('emails.txt', 'r') as file:
+    recipient_emails = [line.strip() for line in file.readlines()]
 
 # Connect to Gmail's SMTP server
 try:
