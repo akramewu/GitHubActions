@@ -1,11 +1,7 @@
 name: Send Emails
 
 on:
-  push:
-    branches:
-      - main
-  schedule:
-    - cron: '0 9 * * *' # Runs at 9:00 AM UTC every day, adjust as needed
+  workflow_dispatch:
 
 jobs:
   send-emails:
