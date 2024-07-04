@@ -1,0 +1,37 @@
+name: Send Reminder Email
+
+on:
+  schedule:
+    - cron: '0 9 * * *' # This will run every day at 9:00 AM UTC
+
+jobs:
+  send-email:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Send Email
+      env:
+        MAIL_SERVER: ${{ secrets.MAIL_SERVER }}
+        MAIL_PORT: ${{ secrets.MAIL_PORT }}
+        MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
+        MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
+      run: |
+        echo "Subject: Daily Reminder - 10 Tips
+        To: akramewu@gmail.com
+        From: $MAIL_USERNAME
+
+        10 Tips for Seeking Allah's Help
+
+        1. Seek Allah S.W.T's help.
+        2. Tell someone that you trust.
+        3. Lower the gaze.
+        4. Set realistic goals (small goals).
+        5. Don't be upset. Never give up on change. Allah will help us, Ameen.
+        6. Develop new habits.
+        7. Be honest.
+        8. Beware of false quitting.
+        9. Always remind yourself about the bad consequences that could happen. Allah is watching us.
+        10. The industry is evil. Maintain self-awareness.
+
+        Help me Ya Rabb, :'( Help my brothers and sisters. Don't give up hope.
+        " | sendmail -S "$MAIL_SERVER:$MAIL_PORT" -au"$MAIL_USERNAME" -ap"$MAIL_PASSWORD" akramewu@gmail.com
