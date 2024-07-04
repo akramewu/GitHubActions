@@ -1,22 +1,18 @@
-name: Send Reminder Email
+name: Send Emails
 
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+    branches:
+      - main
+  schedule:
+    - cron: '0 9 * * *' # Runs at 9:00 AM UTC every day, adjust as needed
 
 jobs:
-  send-email:
+  send-emails:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Repository
+    - name: Checkout repository
       uses: actions/checkout@v2
 
     - name: Set up Python
@@ -25,14 +21,11 @@ jobs:
         python-version: '3.x'
 
     - name: Install dependencies
-      run: |
-         python -m pip install --upgrade pip
+      run: pip install secure-smtplib
 
     - name: Run email script
       env:
-        MAIL_SERVER: ${{ secrets.MAIL_SERVER }}
-        MAIL_PORT: ${{ secrets.MAIL_PORT }}
-        MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
-        MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
-      run: python send_email.py
-
+        SENDER_EMAIL: ${{ secrets.SENDER_EMAIL }}
+        EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+      run: |
+        python send_emails.py
