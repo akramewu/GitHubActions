@@ -1,8 +1,15 @@
 name: Send Reminder Email
 
+# Controls when the workflow will run
 on:
-  schedule:
-    - cron: '0 9 * * *' # This will run every day at 9:00 AM UTC
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
 
 jobs:
   send-email:
