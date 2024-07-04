@@ -1,11 +1,10 @@
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-import os
 
 # Email content
-sender_email = os.getenv('SENDER_EMAIL')
-password = os.getenv('EMAIL_PASSWORD')
+sender_email = "theexploristofficial@gmail.com"
+password = 'srehgfyclcrxaagz'  # Replace with your actual password
 subject = "Daily Reminder - 10 Tips"
 message = """\
 10 Tips for Seeking Allah's Help
@@ -24,8 +23,17 @@ message = """\
 Help me Ya Rabb, :'( Help my brothers and sisters. Don't give up hope.
 """
 
-# List of recipient emails
-recipient_emails = ["akramewu@gmail.com", "anotheremail@example.com", "yetanotheremail@example.com"]
+# Function to read emails from file
+def read_recipients(filename):
+    with open(filename, "r") as file:
+        emails = file.read().splitlines()
+    return emails
+
+# File containing list of recipient emails
+emails_file = "emails.txt"
+
+# List of recipient emails read from file
+recipient_emails = read_recipients(emails_file)
 
 # Connect to Gmail's SMTP server
 try:
