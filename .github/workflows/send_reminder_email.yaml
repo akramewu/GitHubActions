@@ -1,28 +1,37 @@
-name: Send Emails
+name: Send Emails (Every Minute CEST)
 
 on:
   schedule:
-    - cron: "*/1 * * * *"  # Run every minute in CEST
-    
+    - cron: "*/1 * * * *"  # Run every minute (adjust if needed)
+
 jobs:
   send-emails:
     runs-on: ubuntu-latest
-
+    env:
+      TZ: Europe/Berlin  # Set timezone to CEST
+      SENDER_EMAIL: ${{ secrets.SENDER_EMAIL }}
+      EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }} # Use App Password for Gmail
+      RECIPIENT_EMAILS: ${{ secrets.RECIPIENT_EMAILS }}
+    concurrency:
+      group: send-emails
+      cancel-in-progress: true 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: '3.x'
 
       - name: Install dependencies
         run: pip install secure-smtplib
 
+      - name: Clear relevant caches (if needed)
+        run: |
+          rm -rf node_modules  # Adjust paths if you have other caches
+          rm -rf ~/.cache/pip
+
       - name: Run email script
-        env:
-          SENDER_EMAIL: ${{ secrets.SENDER_EMAIL }}
-          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
-          RECIPIENT_EMAILS: ${{ secrets.RECIPIENT_EMAILS }}
-        run: python send_email.py
+        run: python email_send.py
+
