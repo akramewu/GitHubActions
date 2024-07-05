@@ -2,8 +2,8 @@ name: Send Emails
 
 on:
   schedule:
-    - cron: "* * * * *"  # Runs every minute for testing purposes
-
+    - cron: "*/1 * * * *"  # Run every minute in CEST
+    
 jobs:
   send-emails:
     runs-on: ubuntu-latest
