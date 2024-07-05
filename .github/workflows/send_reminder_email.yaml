@@ -2,9 +2,7 @@ name: Send Emails
 
 on:
   schedule:
-    - cron: "0 10 * * *"  # 10 AM UTC corresponds to 11 AM CET
-
-  workflow_dispatch:
+    - cron: "* * * * *"  # Runs every minute for testing purposes
 
 jobs:
   send-emails:
