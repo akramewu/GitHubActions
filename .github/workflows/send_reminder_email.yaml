@@ -3,6 +3,8 @@ name: Send Emails (Every Minute CEST)
 on:
   schedule:
     - cron: "*/1 * * * *"  # Run every minute (adjust if needed)
+  
+  workflow_dispatch:
 
 jobs:
   send-emails:
