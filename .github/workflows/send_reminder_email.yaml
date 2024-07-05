@@ -4,6 +4,8 @@ on:
   schedule:
     - cron: "0 10 * * *"  # 10 AM UTC corresponds to 11 AM CET
 
+  workflow_dispatch:
+
 jobs:
   send-emails:
     runs-on: ubuntu-latest
