@@ -9,7 +9,7 @@ with open('quotes.txt', 'r') as file:
     quotes = file.readlines()
 
 # Read email addresses from emails.txt
-with open('emails.txt', 'r') as file:
+with open('emails_quote.txt', 'r') as file:
     email_addresses = [line.strip() for line in file if line.strip()]
 
 # Email configuration
