@@ -2,7 +2,7 @@ name: Send Daily Islamic Quote
 
 on:
   schedule:
-    - cron: '0 8 * * *'  # Runs at 8:00 AM UTC every day
+    - cron: '0 6 * * *'  # Runs at 7:00 AM UTC every day (9:00 AM CEST)
   workflow_dispatch:  # Allows manual triggering of the workflow
 
 jobs:
