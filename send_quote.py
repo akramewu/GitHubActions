@@ -1,5 +1,6 @@
 import smtplib
 import os
+import random
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from datetime import datetime
@@ -36,8 +37,7 @@ def send_email(quote, receiver_email):
         print(f'Error sending email to {receiver_email}: {e}')
 
 def send_daily_quote():
-    current_day = datetime.now().day
-    quote = quotes[current_day % len(quotes)].strip()  # Get the quote of the day
+    quote = random.choice(quotes).strip()  # Get a random quote
     for email in email_addresses:
         send_email(quote, email)
 
